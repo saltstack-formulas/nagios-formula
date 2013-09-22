@@ -1,4 +1,0 @@
-nagios-formula
-==============
-
-nagios-formula
