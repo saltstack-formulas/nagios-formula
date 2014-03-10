@@ -1,6 +1,0 @@
-{% set map = salt['grains.filter_by']({
-    'Arch': {
-        'pkgs': ['nagios', ],
-        'service': 'nagios',
-    },
-}, merge=salt['pillar.get']('nagios:lookup')) %}
