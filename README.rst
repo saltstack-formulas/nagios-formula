@@ -1,6 +1,6 @@
-=============
-nagios & nrpe
-=============
+======
+nagios
+======
 
 Formulas to set up and configure nagios server and nrpe agent
 
@@ -18,8 +18,12 @@ Available states
 ``nagios``
 ----------
 
-Installs the nagios and nrpe package and start the services
+Install the nagios server, nagios plugins, nrpe plugin and server packages.
 
+``nagios.plugins``
+------------------
+
+Install nagios plugins.
 
 ``nagios.server``
 ----------
@@ -30,19 +34,14 @@ Install the nagios package and start the nagios service.
 ``nagios.nrpe``
 ----------
 
-Install only the nrpe agent and start the service
+Install the nrpe plugin and server.
 
+``nagios.nrpe.server``
+----------
 
-Example Pillar
-==============
+Install the nrpe server.
 
-.. code:: yaml
+``nagios.nrpe.plugin``
+----------
 
-    nagios:
-      log_file: /var/nagios/nagios.log
-      resource_file: /etc/nagios/resource.cfg
-    
-    nrpe:
-      nagios_server: 127.0.0.1
-      include_dir: conf.d/
-
+Install the nrpe plugin.

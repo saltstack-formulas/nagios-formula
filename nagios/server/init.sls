@@ -1,33 +1,34 @@
-{% from "nagios/server/map.jinja" import map with context %}
+{% from "nagios/map.jinja" import map with context %}
 
-nagios:
+nagios-server-package:
   pkg:
     - installed
-    - pkgs: {{ map.pkgs|json }}
+    - name: {{ map.nagios_server_pkg }}
+
+nagios-service:
   service:
     - running
-    - name: {{ map.service }}
+    - name: {{ map.nagios_service }}
     - enable: true
-  group:
-    - present
-    - name: {{ map.group }}
-    - system: true
-  user:
-    - present
-    - name: {{ map.user }}
-    - shell: /bin/false
-    - home: {{ map.home }}
-    - groups:
-      - {{ map.group }}
 
 {% if grains['os'] == 'Arch' %}
-extend:
-  nagios:
-    group:
-      - gid: {{ map.gid }}
-    user:
-      - uid: {{ map.uid }}
-      - guid: {{ map.guid }}
+nagios-group:
+  group:
+    - present
+    - name: nagios
+    - gid: 30
+    - system: true
+
+nagios-user:
+  user:
+    - present
+    - name: nagios
+    - shell: /bin/false
+    - home: /dev/null
+    - gid: 30
+    - guid: 30
+    - gid_from_name: true
+    - system: true
 
 /usr/share/nagios:
   file.directory:
@@ -51,7 +52,7 @@ extend:
     - source: salt://nagios/server/files
     - template: jinja
     - watch_in:
-      - service: {{ map.service }}
+      - service: nagios-service
     - user: nagios
     - group: nagios
 {% endif %}

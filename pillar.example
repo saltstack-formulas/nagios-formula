@@ -1,7 +1,14 @@
 nagios:
-  log_file: /var/nagios/nagios.log
-  resource_file: /etc/nagios/resource.cfg
-
-nrpe:
-  nagios_server: 172.0.0.1
-  include_dir: conf.d/
+  server:
+    log_file: /var/nagios/nagios.log
+    resource_file: /etc/nagios/resource.cfg
+  nrpe:
+    nagios_server: 172.0.0.1
+    include_dir: conf.d/
+  lookup:
+    nagios_plugins: nagios-plugins
+    nagios_server: nagios3
+    nagios_service: nagios3
+    nrpe_plugin: nagios-nrpe-plugin
+    nrpe_server: nagios-nrpe
+    nrpe_service: nrpe

@@ -1,3 +1,4 @@
 include:
-  - nagios.server
-  - nagios.nrpe
+  - .server
+  - .plugins
+  - .nrpe
