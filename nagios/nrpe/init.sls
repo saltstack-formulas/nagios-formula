@@ -10,16 +10,24 @@ nrpe:
     - enable: true
   group:
     - present
-    - gid: 31
+    - name: {{ map.group }}
     - system: true
   user:
     - present
+    - name: {{ map.user }}
     - shell: /bin/false
-    - home: /usr/share/nagios
-    - uid: 31
-    - guid: 31
+    - home: {{ map.home }}
     - groups:
-      - nrpe
+      - {{ map.group }}
+
+{% if grains['os'] == 'Arch' %}
+extend:
+  nrpe:
+    group:
+    - gid: {{ map.gid }}
+    user:
+    - uid: {{ map.uid }}
+    - guid: {{ map.guid }}
 
 /etc/nrpe:
   file:
@@ -30,3 +38,4 @@ nrpe:
       - service: {{ map.service }}
     - user: nrpe
     - group: nrpe
+{% endif %}

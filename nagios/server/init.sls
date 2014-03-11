@@ -10,10 +10,27 @@ nagios:
     - enable: true
   group:
     - present
-    - gid: 30
+    - name: {{ map.group }}
     - system: true
+  user:
+    - present
+    - name: {{ map.user }}
+    - shell: /bin/false
+    - home: {{ map.home }}
+    - groups:
+      - {{ map.group }}
+
+{% if grains['os'] == 'Arch' %}
+extend:
+  nagios:
+    group:
+      - gid: {{ map.gid }}
+    user:
+      - uid: {{ map.uid }}
+      - guid: {{ map.guid }}
+
+/usr/share/nagios:
   file.directory:
-    - name: /usr/share/nagios
     - user: nagios
     - group: nagios
     - mode: 755
@@ -21,14 +38,12 @@ nagios:
       - user
       - group
       - mode
-  user:
-    - present
-    - shell: /bin/false
-    - home: /usr/share/nagios 
-    - uid: 30
-    - guid: 30
-    - groups:
-      - nagios
+
+/var/nagios/nagios.log:
+  file.managed:
+    - user: root
+    - group: nagios
+    - mode: 660
 
 /etc/nagios:
   file:
@@ -39,10 +54,4 @@ nagios:
       - service: {{ map.service }}
     - user: nagios
     - group: nagios
-
-/var/nagios/nagios.log:
-  file.managed:
-    - user: root
-    - group: nagios
-    - mode: 660
-
+{% endif %}

@@ -1,10 +1,23 @@
 {% set map = salt['grains.filter_by']({
     'Arch': {
+        'group': 'nrpe',
+        'home': '/usr/share/nagios',
         'pkgs': ['nagios-nrpe', 'nagios-nrpe-plugin', ],
         'service': 'nrpe',
+        'user': 'nrpe',
+    },
+    'Debian': {
+        'group': 'nagios',
+        'home': '/var/lib/nagios',
+        'pkgs': ['nagios-nrpe-server', 'nagios-nrpe-plugin', ],
+        'service': 'nagios-nrpe-server',
+        'user': 'nagios',
     },
     'Redhat': {
-      'pkgs': ['nrpe', 'nagios-plugins-nrpe', ],
-      'service': 'nrpe',
+        'group': 'nrpe',
+        'home': '/usr/share/nagios',
+        'pkgs': ['nrpe', 'nagios-plugins-nrpe', ],
+        'service': 'nrpe',
+        'user': 'nrpe',
     },
 }, merge=salt['pillar.get']('nrpe:lookup')) %}
