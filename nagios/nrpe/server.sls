@@ -11,7 +11,18 @@ nrpe-server-service:
     - name: {{ map.nrpe_service }}
     - enable: true
 
-{% if grains['os'] == 'Arch' %}
+/etc/nagios/nrpe.cfg:
+   file:
+    - managed
+    - source: salt://nagios/nrpe/files/nrpe.cfg.jinja
+    - template: jinja
+    - user: root
+    - group: root
+    - mode: 644
+    - watch_in:
+      - service: nrpe-server-service
+
+{% if grains['os_family'] == 'Arch' %}
 nrpe-group:
   group:
     - present
@@ -30,13 +41,12 @@ nrpe-user:
     - uid: 31
     - guid: 31
 
-/etc/nrpe:
-  file:
-    - recurse
-    - source: salt://nagios/nrpe/files
-    - template: jinja
-    - watch_in:
-      - service: nrpe-server-service
-    - user: nrpe
-    - group: nrpe
+extend:
+  /etc/nagios/nrpe.cfg:
+    file:
+      - user: nrpe
+      - group: nrpe
+      - require:
+        - user: nrpe-user
+        - group: nrpe-group
 {% endif %}

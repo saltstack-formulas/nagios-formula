@@ -1,0 +1,25 @@
+{% set nrpe = salt['pillar.get']('nagios:nrpe', {}) -%}
+
+# DO NOT EDIT
+#
+# This file is managed by salt.
+# Modify the config that generates this file instead
+#
+
+log_facility=daemon
+pid_file=/var/run/nagios/nrpe.pid
+server_port={{ nrpe.get('server_port', '5666') }}
+server_address={{ nrpe.get('server_address', '127.0.0.1') }}
+nrpe_user=nagios
+nrpe_group=nagios
+allowed_hosts={{ nrpe.get('allowed_hosts', '127.0.0.1') }}
+dont_blame_nrpe=0
+# command_prefix=/usr/bin/sudo
+debug=0
+command_timeout={{ nrpe.get('command_timeout', '60') }}
+connection_timeout={{ nrpe.get('connection_timeout', '300') }}
+#allow_weak_random_seed=1
+
+{%- for nrpe_check in nrpe.get('checks', []) %}
+{{ nrpe_check }}
+{%- endfor %}
