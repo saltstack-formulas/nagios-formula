@@ -1,7 +1,7 @@
 {% set map = salt['grains.filter_by']({
     'Arch': {
         'nagios_plugins': 'nagios-plugins',
-        'nagios_server_pkg': 'nagios',
+        'nagios_server': 'nagios',
         'nagios_service': 'nagios',
         'nrpe_plugin': 'nagios-nrpe-plugin',
         'nrpe_server': 'nagios-nrpe',
@@ -9,7 +9,7 @@
     },
     'Debian': {
         'nagios_plugins': 'nagios-plugins',
-        'nagios_server_pkg': 'nagios3',
+        'nagios_server': 'nagios3',
         'nagios_service': 'nagios3',
         'nrpe_plugin': 'nagios-nrpe-plugin',
         'nrpe_server': 'nagios-nrpe-server',

@@ -3,7 +3,7 @@
 nagios-server-package:
   pkg:
     - installed
-    - name: {{ map.nagios_server_pkg }}
+    - name: {{ map.nagios_server }}
 
 nagios-service:
   service:
