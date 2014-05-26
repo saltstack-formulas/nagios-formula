@@ -45,3 +45,8 @@ Install the nrpe server.
 ----------
 
 Install the nrpe plugin.
+
+``nagios.nsca.client``
+----------------------
+
+Install the nsca client.

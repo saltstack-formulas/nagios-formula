@@ -6,6 +6,7 @@
         'nrpe_plugin': 'nagios-nrpe-plugin',
         'nrpe_server': 'nagios-nrpe',
         'nrpe_service': 'nrpe',
+        'nsca_client': 'nagios-nsca',
     },
     'Debian': {
         'nagios_plugins': 'nagios-plugins',
@@ -14,5 +15,6 @@
         'nrpe_plugin': 'nagios-nrpe-plugin',
         'nrpe_server': 'nagios-nrpe-server',
         'nrpe_service': 'nagios-nrpe-server',
+        'nsca_client': 'nsca-client',
     },
 }, merge=salt['pillar.get']('nagios:lookup')) %}

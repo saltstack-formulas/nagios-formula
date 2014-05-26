@@ -14,6 +14,10 @@ nagios:
       - command[check_hda1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda1
       - command[check_zombie_procs]=/usr/lib/nagios/plugins/check_procs -w 5 -c 10 -s Z
       - command[check_total_procs]=/usr/lib/nagios/plugins/check_procs -w 150 -c 200
+  nsca:
+    client:
+      password: s3crIt
+      encryption_method: 1
   lookup:
     nagios_plugins: nagios-plugins
     nagios_server: nagios3

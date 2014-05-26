@@ -1,0 +1,10 @@
+{% set nsca_client = salt['pillar.get']('nagios:nsca:client', {}) -%}
+
+# DO NOT EDIT
+#
+# This file is managed by salt.
+# Modify the config that generates this file instead
+#
+
+password={{ '"%s"'|format(nsca_client.get('password', '')) }}
+encryption_method={{ nsca_client.get('encryption_method', 1) }}
