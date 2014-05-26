@@ -26,23 +26,23 @@ Install the nagios server, nagios plugins, nrpe plugin and server packages.
 Install nagios plugins.
 
 ``nagios.server``
-----------
+-----------------
 
 Install the nagios package and start the nagios service.
 
 
 ``nagios.nrpe``
-----------
+---------------
 
 Install the nrpe plugin and server.
 
 ``nagios.nrpe.server``
-----------
+----------------------
 
 Install the nrpe server.
 
 ``nagios.nrpe.plugin``
-----------
+----------------------
 
 Install the nrpe plugin.
 
