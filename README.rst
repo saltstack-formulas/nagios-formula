@@ -33,7 +33,8 @@ Install the nagios package and start the nagios service.
 Install only the nrpe agent and start the service
 
 
-Example Pillar:
+Example Pillar
+==============
 
 .. code:: yaml
 
