@@ -42,7 +42,7 @@ nagios-group:
     - system: true
     - gid: 31
 
-nrpe-user:
+nagios-user:
   user:
     - present
     - name: nagios
