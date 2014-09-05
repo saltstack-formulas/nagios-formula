@@ -1,14 +1,14 @@
-{% from "nagios/map.jinja" import map with context %}
+{% from "nagios/map.jinja" import nrpe with context %}
 
 nrpe-server-package:
   pkg:
     - installed
-    - name: {{ map.nrpe_server }}
+    - name: {{ nrpe.server }}
 
 nrpe-server-service:
   service:
     - running
-    - name: {{ map.nrpe_service }}
+    - name: {{ nrpe.service }}
     - enable: true
 
 /etc/nagios/nrpe.cfg:
