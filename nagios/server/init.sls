@@ -55,7 +55,7 @@ nagios-user:
 
 nagios-server-log:
   file.managed:
-    - name: {{ map.nagios_server_log }}
+    - name: {{ map.nagios_log }}
     - user: root
     - group: nagios
     - mode: 660
