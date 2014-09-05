@@ -14,7 +14,7 @@ nagios-service:
 nagios-server-config:
   file:
     - managed
-    - name: {{ map.nagios_config_dir }}/nagios.cfg
+    - name: {{ map.nagios_conf }}
     - source: salt://nagios/server/files/nagios.cfg
     - template: jinja
     - watch_in:
@@ -23,7 +23,7 @@ nagios-server-config:
 nagios-cgi-config:
   file:
     - managed
-    - name: {{ map.nagios_config_dir }}/cgi.cfg
+    - name: {{ map.nagios_cgi_conf }}
     - source: salt://nagios/server/files/cgi.cfg
     - template: jinja
 
