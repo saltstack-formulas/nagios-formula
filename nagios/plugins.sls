@@ -1,6 +1,6 @@
-{% from "nagios/map.jinja" import map with context %}
+{% from "nagios/map.jinja" import nagios with context %}
 
 nagios-plugins:
   pkg:
     - installed
-    - name: {{ map.nagios_plugins }}
+    - name: {{ nagios.plugins }}

@@ -1,36 +1,36 @@
-{% from "nagios/map.jinja" import map with context %}
+{% from "nagios/map.jinja" import nagios with context %}
 
 nagios-server-package:
   pkg:
     - installed
-    - name: {{ map.nagios_server }}
+    - name: {{ nagios.server }}
 
 nagios-service:
   service:
     - running
-    - name: {{ map.nagios_service }}
+    - name: {{ nagios.service }}
     - enable: true
 
 nagios-server-config:
   file:
     - managed
-    - name: {{ map.nagios_conf }}
+    - name: {{ nagios.conf }}
     - source: salt://nagios/server/files/nagios.cfg
     - template: jinja
     - watch_in:
-      - service: {{ map.nagios_service }}
+      - service: {{ nagios.service }}
 
 nagios-cgi-config:
   file:
     - managed
-    - name: {{ map.nagios_cgi_conf }}
+    - name: {{ nagios.cgi_conf }}
     - source: salt://nagios/server/files/cgi.cfg
     - template: jinja
 
 nagios-resource-config:
   file:
     - managed
-    - name: {{ map.nagios_resource_file }}
+    - name: {{ nagios.resource_file }}
     - source: salt://nagios/server/files/resource.cfg
     - template: jinja
 
@@ -55,7 +55,7 @@ nagios-user:
 
 nagios-server-log:
   file.managed:
-    - name: {{ map.nagios_log }}
+    - name: {{ nagios.log }}
     - user: root
     - group: nagios
     - mode: 660

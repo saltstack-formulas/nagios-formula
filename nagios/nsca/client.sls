@@ -1,9 +1,9 @@
-{% from "nagios/map.jinja" import map with context %}
+{% from "nagios/map.jinja" import nsca with context %}
 
 nagios-nsca-client-package:
   pkg:
     - installed
-    - name: {{ map.nsca_client }}
+    - name: {{ nsca.client }}
 
 /etc/send_nsca.cfg:
   file:

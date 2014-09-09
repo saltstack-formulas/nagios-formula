@@ -1,6 +1,6 @@
-{% from "nagios/map.jinja" import map with context %}
+{% from "nagios/map.jinja" import nrpe with context %}
 
 nrpe-plugin-package:
   pkg:
     - installed
-    - name: {{ map.nrpe_plugin }}
+    - name: {{ nrpe.plugin }}
