@@ -17,7 +17,7 @@ nrpe-server-service:
     - group: root
     - mode: 644
     - watch_in:
-      - service: nrpe-server-service
+      - service: {{ nrpe.service }}
 
 {% if grains['os_family'] == 'Arch' %}
 nrpe-group:
