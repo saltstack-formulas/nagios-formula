@@ -1,19 +1,16 @@
 {% from "nagios/map.jinja" import nagios with context %}
 
 nagios-server-package:
-  pkg:
-    - installed
+  pkg.installed:
     - name: {{ nagios.server }}
 
 nagios-service:
-  service:
-    - running
+  service.running:
     - name: {{ nagios.service }}
     - enable: true
 
 nagios-server-config:
-  file:
-    - managed
+  file.managed:
     - name: {{ nagios.conf }}
     - source: salt://nagios/server/files/nagios.cfg
     - template: jinja
@@ -21,30 +18,26 @@ nagios-server-config:
       - service: {{ nagios.service }}
 
 nagios-cgi-config:
-  file:
-    - managed
+  file.managed:
     - name: {{ nagios.cgi_conf }}
     - source: salt://nagios/server/files/cgi.cfg
     - template: jinja
 
 nagios-resource-config:
-  file:
-    - managed
+  file.managed:
     - name: {{ nagios.resource_file }}
     - source: salt://nagios/server/files/resource.cfg
     - template: jinja
 
 {% if grains['os_family'] == 'Arch' %}
 nagios-group:
-  group:
-    - present
+  group.present:
     - name: nagios
     - system: true
     - gid: 31
 
 nagios-user:
-  user:
-    - present
+  user.present:
     - name: nagios
     - shell: /bin/false
     - home: /usr/share/nagios
