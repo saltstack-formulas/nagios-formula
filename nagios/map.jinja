@@ -66,6 +66,11 @@
         'server': 'nagios-nrpe-server',
         'service': 'nagios-nrpe-server',
     },
+    'RedHat': {
+        'plugin': 'nagios-plugins-all',
+        'server': 'nrpe',
+        'service': 'nrpe',
+    },
 }, merge=salt['pillar.get']('nagios:lookup:nrpe')) %}
 
 {% set nsca = salt['grains.filter_by']({
