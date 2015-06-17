@@ -19,6 +19,14 @@ nrpe-server-service:
     - watch_in:
       - service: {{ nrpe.service }}
 
+{% if grains['os_family'] == 'Debian' %}
+{# may be implied by the os_family, but let's be sure #}
+{{ nrpe.cfg_dir }}:
+  file.directory:
+    - require:
+      - pkg: nrpe-server-package
+{% endif %}
+
 {% if grains['os_family'] == 'Arch' %}
 nrpe-group:
   group.present:
