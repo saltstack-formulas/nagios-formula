@@ -139,12 +139,14 @@ nagios:
       plugins: nagios-plugins
       server: nagios3
       service: nagios3
+      dynamic_cfg_dir: /etc/nagios3/dynamic/
     nrpe:
       plugin: nagios-nrpe-plugin
       plugin_dir: /usr/lib/nagios/plugins/
       cfg_dir: /etc/nagios/nrpe.d/
       server: nagios-nrpe
       service: nrpe
+
 # This pillar data targetted at minion(s) and at the Nagios host, both.
   checks:
     check_procs_ldap:
@@ -162,10 +164,18 @@ nagios:
         hostnames:
           - sololdap.example.com
 
-# This mine function is necessary for the dynamic host/groups generation script (dynamic_cfg.py) 
-# to work. All hosts running the NRPE daemon get this if you want their presence in Nagios host/groups
-# configuration to work.
-mine_functions:
-  nagios_membership:
-    mine_function: pillar.get
-    key: "nagios:checks"
+# This pillar data tree would _only_ be targetted at the Nagios server.
+  pseudohosts:  # You can statically define Nagios hosts (read: non-LDAP) hosts here.
+    admin.example.com:
+      parent: example.com
+    example.com: ~
+  checks:
+    check_example_com_http:  # Example of a remote (read: non-NRPE) check.
+      plugin:
+        command_name: 'check_http'  # defaults to check_nrpe; this is to run local check
+        command_args: '-w 30 -c 60 -H $HOSTADDRESS$ -u /index.html'
+      service:
+        description: "example.com external http check"
+        template: "limited-notification-service"
+        hostnames:
+          - example.com # If a pseudohost, *MUST* be defined above. Does not result in a host definition.
