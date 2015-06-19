@@ -124,7 +124,7 @@ nagios:
     command_timeout: 60
     connection_timeout: 300
     dont_blame_nrpe: 0
-    checks:
+    nrpe_commands:
       - command[check_users]=/usr/lib/nagios/plugins/check_users -w 5 -c 10
       - command[check_load]=/usr/lib/nagios/plugins/check_load -w 15,10,5 -c 30,25,20
       - command[check_hda1]=/usr/lib/nagios/plugins/check_disk -w 20% -c 10% -p /dev/sda1
@@ -135,9 +135,47 @@ nagios:
       password: s3crIt
       encryption_method: 1
   lookup:
-    nagios_plugins: nagios-plugins
-    nagios_server: nagios3
-    nagios_service: nagios3
-    nrpe_plugin: nagios-nrpe-plugin
-    nrpe_server: nagios-nrpe
-    nrpe_service: nrpe
+    nagios:
+      plugins: nagios-plugins
+      server: nagios3
+      service: nagios3
+      dynamic_cfg_dir: /etc/nagios3/dynamic/
+    nrpe:
+      plugin: nagios-nrpe-plugin
+      plugin_dir: /usr/lib/nagios/plugins/
+      cfg_dir: /etc/nagios/nrpe.d/
+      server: nagios-nrpe
+      service: nrpe
+
+# This pillar data targetted at minion(s) and at the Nagios host, both.
+  checks:
+    check_procs_ldap:
+      #decommissioned: True  # Optional indication that the check should be _removed_ from a minion
+      plugin:
+        plugin_file: check_procs
+        #plugin_source: 'salt://ldap/files/check_procs  # optional
+        plugin_args: '-c 1:1 -C slapd'
+      service:
+        description: "slapd process check"
+        template: "critical-service" # default to limited-notification-service
+        hostgroups:
+          - com.example.ldap  # list of applicable nagios hostgroups
+          - com.example       # e.g. for a core check
+        hostnames:
+          - sololdap.example.com
+
+# This pillar data tree would _only_ be targetted at the Nagios server.
+  pseudohosts:  # You can statically define Nagios hosts (read: non-LDAP) hosts here.
+    admin.example.com:
+      parent: example.com
+    example.com: ~
+  checks:
+    check_example_com_http:  # Example of a remote (read: non-NRPE) check.
+      plugin:
+        command_name: 'check_http'  # defaults to check_nrpe; this is to run local check
+        command_args: '-w 30 -c 60 -H $HOSTADDRESS$ -u /index.html'
+      service:
+        description: "example.com external http check"
+        template: "limited-notification-service"
+        hostnames:
+          - example.com # If a pseudohost, *MUST* be defined above. Does not result in a host definition.

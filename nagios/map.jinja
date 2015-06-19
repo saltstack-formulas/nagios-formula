@@ -56,6 +56,9 @@
 }, merge=salt['pillar.get']('nagios:lookup:nagios')) %}
 
 {% set nrpe = salt['grains.filter_by']({
+    'default': {
+        'plugin_dir': '/usr/lib/nagios/plugins',
+    },
     'Arch': {
         'plugin': 'nagios-nrpe-plugin',
         'server': 'nagios-nrpe',

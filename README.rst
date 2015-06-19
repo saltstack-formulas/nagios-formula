@@ -30,6 +30,10 @@ Install nagios plugins.
 
 Install the nagios package and start the nagios service.
 
+``nagios.server.dynamic``
+------------------------
+
+Generate service and command definitions based on pillar data.
 
 ``nagios.nrpe``
 ---------------
@@ -45,6 +49,11 @@ Install the nrpe server.
 ----------------------
 
 Install the nrpe plugin.
+
+``nagios.nrpe.dynamic``
+-----------------------
+
+(Debian only) Generate command definitions and optionally install non-packaged plugins based on pillar data.
 
 ``nagios.nsca.client``
 ----------------------
