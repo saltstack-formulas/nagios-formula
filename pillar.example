@@ -186,3 +186,8 @@ nagios3:
   nrpe:
     nrpe_commands:
       check_http: /usr/lib/nagios/plugins/check_http -H localhost -p 80
+
+# If you remove all other NRPE pillars from a host it should still have a blank pillar like so
+nagios3:
+  nrpe:
+    nrpe_commands:
