@@ -52,6 +52,8 @@ clear decommissioned {{ check_name }} nrpe command:
     - require:
       - pkg: nrpe-plugin-package
       - file: {{ nrpe.cfg_dir }}
+    - watch_in:
+      - service: nrpe-server-service
 {% endif %}  # if 'plugin_file' in check_def['plugin']
 {% endif %}  # decommed
 
