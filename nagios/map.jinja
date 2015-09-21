@@ -11,6 +11,12 @@
         'url_html_path': '/nagios3',
         'nagios_check_command': '/usr/lib/nagios/plugins/check_nagios /var/cache/nagios3/status.dat 5 \'/usr/sbin/nagios3\'',
     },
+    'RedHat': {
+        'config_file': '/etc/nagios/nagios.cfg',
+        'physical_html_path': '/usr/share/nagios/html',
+        'url_html_path': '/nagios',
+        'nagios_check_command': '/usr/lib64/nagios/plugins/check_nagios -F /var/log/nagios/status.dat -e 5 -C /usr/sbin/nagios',
+    },
 }, merge=salt['pillar.get']('nagios:lookup:cgi')) %}
 
 {% set nagios = salt['grains.filter_by']({
