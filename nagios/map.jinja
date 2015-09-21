@@ -11,6 +11,12 @@
         'url_html_path': '/nagios3',
         'nagios_check_command': '/usr/lib/nagios/plugins/check_nagios /var/cache/nagios3/status.dat 5 \'/usr/sbin/nagios3\'',
     },
+    'RedHat': {
+        'config_file': '/etc/nagios/nagios.cfg',
+        'physical_html_path': '/usr/share/nagios/html',
+        'url_html_path': '/nagios',
+        'nagios_check_command': '/usr/lib64/nagios/plugins/check_nagios -F /var/log/nagios/status.dat -e 5 -C /usr/sbin/nagios',
+    },
 }, merge=salt['pillar.get']('nagios:lookup:cgi')) %}
 
 {% set nagios = salt['grains.filter_by']({
@@ -52,6 +58,26 @@
         'state_retention_file': '/var/lib/nagios3/retention.dat',
         'status_file': '/var/cache/nagios3/status.dat',
         'temp_file': '/var/cache/nagios3/nagios.tmp',
+    },
+    'RedHat': {
+        'check_result_path': '/var/log/nagios/spool/checkresults',
+        'conf': '/etc/nagios/nagios.conf',
+        'cgi_conf': '/etc/nagios/cgi.conf',
+        'command_file': '/var/spool/nagios/cmd/nagios.cmd',
+        'debug_file': '/var/log/nagios/nagios.debug',
+        'lock_file': '/var/run/nagios.pid',
+        'log': '/var/log/nagios/nagios.log',
+        'log_archive_path': '/var/log/nagios/archives',
+        'object_cache': '/var/log/nagios/objects.cache',
+        'p1_file': '/usr/sbin/p1.pl',
+        'precached_object_file': '/var/log/nagios/objects.precache',
+        'plugins': 'nagios-plugins',
+        'resource_file': '/etc/nagios/private/resource.cfg',
+        'server': 'nagios',
+        'service': 'nagios',
+        'state_retention_file': '/var/log/nagios/retention.dat',
+        'status_file': '/var/log/nagios/status.dat',
+        'temp_file': '/var/log/nagios/nagios.tmp',
     },
 }, merge=salt['pillar.get']('nagios:lookup:nagios')) %}
 
