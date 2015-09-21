@@ -53,6 +53,26 @@
         'status_file': '/var/cache/nagios3/status.dat',
         'temp_file': '/var/cache/nagios3/nagios.tmp',
     },
+    'RedHat': {
+        'check_result_path': '/var/log/nagios/spool/checkresults',
+        'conf': '/etc/nagios/nagios.conf',
+        'cgi_conf': '/etc/nagios/cgi.conf',
+        'command_file': '/var/spool/nagios/cmd/nagios.cmd',
+        'debug_file': '/var/log/nagios/nagios.debug',
+        'lock_file': '/var/run/nagios.pid',
+        'log': '/var/log/nagios/nagios.log',
+        'log_archive_path': '/var/log/nagios/archives',
+        'object_cache': '/var/log/nagios/objects.cache',
+        'p1_file': '/usr/sbin/p1.pl',
+        'precached_object_file': '/var/log/nagios/objects.precache',
+        'plugins': 'nagios-plugins',
+        'resource_file': '/etc/nagios/private/resource.cfg',
+        'server': 'nagios',
+        'service': 'nagios',
+        'state_retention_file': '/var/log/nagios/retention.dat',
+        'status_file': '/var/log/nagios/status.dat',
+        'temp_file': '/var/log/nagios/nagios.tmp',
+    },
 }, merge=salt['pillar.get']('nagios:lookup:nagios')) %}
 
 {% set nrpe = salt['grains.filter_by']({
