@@ -1,4 +1,5 @@
 {% set nrpe = salt['pillar.get']('nagios:nrpe', {}) -%}
+{% from "nagios/map.jinja" import nrpe as nrpe_map with context -%}
 
 # DO NOT EDIT
 #
@@ -18,6 +19,9 @@ dont_blame_nrpe={{ nrpe.get('dont_blame_nrpe', 0) }}
 debug=0
 command_timeout={{ nrpe.get('command_timeout', '60') }}
 connection_timeout={{ nrpe.get('connection_timeout', '300') }}
+{%- if nrpe_map.get('cfg_dir', false) %}
+include_dir={{nrpe_map.get('cfg_dir')}}
+{%- endif %}
 #allow_weak_random_seed=1
 
 {%- if nrpe.nrpe_commands is defined %}
