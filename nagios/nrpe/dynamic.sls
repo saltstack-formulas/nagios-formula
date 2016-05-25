@@ -26,7 +26,7 @@ include:
   file.managed:
     - name: {{ nrpe.plugin_dir }}/{{ check_def['plugin']['plugin_file'] }}
     - source: {{ check_def['plugin']['plugin_source'] }}
-    - mode: 0755
+    - mode: '0755'
     - watch_in:
       - service: nrpe-server-service
 {% else %}
