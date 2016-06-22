@@ -38,6 +38,7 @@
         'state_retention_file': '/var/nagios/retention.dat',
         'status_file': '/var/nagios/status.dat',
         'temp_file': '/var/nagios/nagios.tmp',
+        'plugin_dir': '/usr/lib/nagios/plugins',
     },
     'Debian': {
         'check_result_path': '/var/lib/nagios3/spool/checkresults',
@@ -58,6 +59,7 @@
         'state_retention_file': '/var/lib/nagios3/retention.dat',
         'status_file': '/var/cache/nagios3/status.dat',
         'temp_file': '/var/cache/nagios3/nagios.tmp',
+        'plugin_dir': '/usr/lib/nagios/plugins',
     },
     'RedHat': {
         'check_result_path': '/var/log/nagios/spool/checkresults',
@@ -78,6 +80,7 @@
         'state_retention_file': '/var/log/nagios/retention.dat',
         'status_file': '/var/log/nagios/status.dat',
         'temp_file': '/var/log/nagios/nagios.tmp',
+        'plugin_dir': '/usr/lib/nagios/plugins',
     },
 }, merge=salt['pillar.get']('nagios:lookup:nagios')) %}
 
@@ -111,4 +114,7 @@
     'Debian': {
         'client': 'nsca-client',
     },
+    'RedHat': {
+        'client': 'nsca-client',
+     },
 }, merge=salt['pillar.get']('nagios:lookup:nsca')) %}
