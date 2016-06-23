@@ -10,7 +10,9 @@
 log_facility=daemon
 pid_file={{ nrpe.get('pid_file', '/var/run/nagios/nrpe.pid') }}
 server_port={{ nrpe.get('server_port', '5666') }}
+{% if nrpe.get('server_address') %}
 server_address={{ nrpe.get('server_address', '127.0.0.1') }}
+{% endif %}
 nrpe_user=nagios
 nrpe_group=nagios
 allowed_hosts={{ nrpe.get('allowed_hosts', '127.0.0.1') }}
