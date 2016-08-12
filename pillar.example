@@ -121,6 +121,8 @@ nagios:
     server_address: 127.0.0.1
     server_port: 5666
     pid_file: /var/run/nagios/nrpe.pid
+    user: nagios
+    group: nagios
     allowed_hosts: 127.0.0.1
     command_timeout: 60
     connection_timeout: 300

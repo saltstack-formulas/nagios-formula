@@ -13,8 +13,8 @@ server_port={{ nrpe.get('server_port', '5666') }}
 {% if nrpe.get('server_address') %}
 server_address={{ nrpe.get('server_address', '127.0.0.1') }}
 {% endif %}
-nrpe_user=nagios
-nrpe_group=nagios
+nrpe_user={{ nrpe.get('user', 'nagios') }}
+nrpe_group={{ nrpe.get('group', 'nagios') }}
 allowed_hosts={{ nrpe.get('allowed_hosts', '127.0.0.1') }}
 dont_blame_nrpe={{ nrpe.get('dont_blame_nrpe', 0) }}
 # command_prefix=/usr/bin/sudo
