@@ -121,8 +121,6 @@ nagios:
     server_address: 127.0.0.1
     server_port: 5666
     pid_file: /var/run/nagios/nrpe.pid
-    user: nagios
-    group: nagios
     allowed_hosts: 127.0.0.1
     command_timeout: 60
     connection_timeout: 300
@@ -144,11 +142,13 @@ nagios:
       service: nagios3
       dynamic_cfg_dir: /etc/nagios3/dynamic/
     nrpe:
+      cfg_dir: /etc/nagios/nrpe.d/
+      group: nagios
       plugin: nagios-nrpe-plugin
       plugin_dir: /usr/lib/nagios/plugins/
-      cfg_dir: /etc/nagios/nrpe.d/
       server: nagios-nrpe
       service: nrpe
+      user: nagios
 
 # This pillar data targetted at minion(s) and at the Nagios host, both.
   checks:
