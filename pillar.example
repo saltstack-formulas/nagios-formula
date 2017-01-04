@@ -141,7 +141,8 @@ nagios:
       server: nagios3
       service: nagios3
       dynamic_cfg_dir: /etc/nagios3/dynamic/
-      USER3: "'s3crIt'"
+      macro_users:
+        USER3: "'s3crIt'"
     nrpe:
       plugin: nagios-nrpe-plugin
       plugin_dir: /usr/lib/nagios/plugins/
