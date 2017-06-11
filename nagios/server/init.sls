@@ -28,6 +28,8 @@ nagios-resource-config:
     - name: {{ nagios.resource_file }}
     - source: salt://nagios/server/files/resource.cfg
     - template: jinja
+    - watch_in:
+      - service: {{ nagios.service }}
 
 {% if grains['os_family'] == 'Arch' %}
 nagios-group:
