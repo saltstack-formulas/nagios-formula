@@ -14,8 +14,8 @@
 {# TODO: extend this to other OS families; this currently depends on nrpe.d style #}
 
 include:
-  - .server
-  - .plugin
+  - nagios.nrpe.server
+  - nagios.plugins
 
 {% if salt['pillar.get']("nagios:checks", False) %}
 {% for check_name, check_def in salt['pillar.get']("nagios:checks").items() %}
@@ -34,7 +34,7 @@ include:
     - name: {{ nrpe.plugin_dir }}/{{ check_def['plugin']['plugin_file'] }}
 {%- endif %}
     - require:
-      - pkg: nrpe-plugin-package
+      - sls: nagios.plugins
 {% endif %}  # plugin_file in check_def['plugin']
 {% endif %}  # decommed
 
@@ -50,7 +50,7 @@ clear decommissioned {{ check_name }} nrpe command:
     - contents: |
         command[{{ check_name }}]={{ nrpe.plugin_dir }}/{{ check_def['plugin']['plugin_file'] }} {{ check_def['plugin'].get('plugin_args', "") }}
     - require:
-      - pkg: nrpe-plugin-package
+      - file: {{ check_name }} nagios plugin
       - file: {{ nrpe.cfg_dir }}
     - watch_in:
       - service: nrpe-server-service
