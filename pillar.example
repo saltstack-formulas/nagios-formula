@@ -135,6 +135,9 @@ nagios:
     client:
       password: s3crIt
       encryption_method: 1
+  plugins:
+    extra_pkgs:
+      - nagios-plugins-contrib
   lookup:
     nagios:
       plugins: nagios-plugins
