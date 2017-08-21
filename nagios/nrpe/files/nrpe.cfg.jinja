@@ -15,7 +15,11 @@ server_address={{ nrpe.get('server_address', '127.0.0.1') }}
 {% endif %}
 nrpe_user={{ nrpe_map.get('user', 'nagios') }}
 nrpe_group={{ nrpe_map.get('group', 'nagios') }}
-allowed_hosts={{ nrpe.get('allowed_hosts', '127.0.0.1') }}
+{%- if nrpe.allowed_hosts is defined and nrpe.allowed_hosts is iterable and nrpe.allowed_hosts is not string %}
+allowed_hosts={{ nrpe.allowed_hosts | join(',') }}
+{%- else %}
+allowed_hosts={{ nrpe.allowed_hosts | default('127.0.0.1') }}
+{%- endif %}
 dont_blame_nrpe={{ nrpe.get('dont_blame_nrpe', 0) }}
 # command_prefix=/usr/bin/sudo
 debug=0
