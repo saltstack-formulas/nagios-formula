@@ -19,12 +19,17 @@ nrpe-server-service:
     - watch_in:
       - service: {{ nrpe.service }}
 
-{% if grains['os_family'] == 'Debian' %}
-{# may be implied by the os_family, but let's be sure #}
 {{ nrpe.cfg_dir }}:
   file.directory:
     - require:
-      - pkg: nrpe-server-package
+      - pkg: {{ nrpe.server }}
+
+{% if grains['os_family'] == 'RedHat' %}
+{# create link on Redhat to be more close to debian and other distributions #}
+nagios_plugins_sym:
+  file.symlink:
+    - name: /usr/lib/nagios
+    - target: /usr/lib64/nagios
 {% endif %}
 
 {% if grains['os_family'] == 'Arch' %}

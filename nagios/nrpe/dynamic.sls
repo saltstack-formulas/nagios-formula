@@ -10,8 +10,7 @@
 
 {% from "nagios/map.jinja" import nrpe with context %}
 
-{% if grains['os_family'] == 'Debian' %}
-{# TODO: extend this to other OS families; this currently depends on nrpe.d style #}
+{% if grains['os_family'] in ['Debian','RedHat']  %}
 
 include:
   - .server
@@ -60,4 +59,4 @@ clear decommissioned {{ check_name }} nrpe command:
 {% endfor %}  # end on the minion
 {% endif %}   # if salt['pillar.get']("nagios:checks", False)
 
-{% endif %}  # TODO: extend this to non-Debian os families
+{% endif %}  #
