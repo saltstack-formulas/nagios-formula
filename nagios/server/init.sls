@@ -1,13 +1,15 @@
 {% from "nagios/map.jinja" import nagios with context %}
+{% set service_function = {'enabled':'running', 'dead':'dead', 'disabled':'disabled'}.get(nagios.service_status) %}
+{% set service_enabled  = {'enabled':True, 'dead':False, 'disabled':False}.get(nagios.service_status) %}
 
 nagios-server-package:
   pkg.installed:
     - name: {{ nagios.server }}
 
 nagios-service:
-  service.running:
+  service.{{ service_function }}:
     - name: {{ nagios.service }}
-    - enable: true
+    - enable: {{ service_enabled }}
 
 nagios-server-config:
   file.managed:
