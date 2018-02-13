@@ -63,6 +63,8 @@ nagios:
     event_handler_timeout: 30
     notification_timeout: 30
     ocsp_timeout: 5
+    # This option allows you to specify a command to be run after every service check, which can be useful in distributed monitoring.
+    # ocsp_command: obsessive_service_handler
     perfdata_timeout: 5
     retain_state_information: 1
     retention_update_interval: 60
