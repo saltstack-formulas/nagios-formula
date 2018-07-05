@@ -156,6 +156,7 @@ nagios:
       server: nagios-nrpe
       service: nrpe
       user: nagios
+      cmd_mode: 644  # nagios.nrpe.dynamic - /etc/nagios/nrpe.d/* files modes
 
 # This pillar data targetted at minion(s) and at the Nagios host, both.
   checks:
