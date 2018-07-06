@@ -146,6 +146,10 @@ nagios:
       plugins: nagios-plugins
       server: nagios3
       service: nagios3
+      # enabled: Start and add to autostart
+      # disabled: Remove from autostart, but ignore if running or not
+      # dead: Stop and remove from autostart
+      service_status: enabled
       dynamic_cfg_dir: /etc/nagios3/dynamic/
       macro_users:
         USER3: "'s3crIt'"
