@@ -44,6 +44,7 @@ clear decommissioned {{ check_name }} nrpe command:
 {{ check_name }} nrpe command definition:
   file.managed:
     - name: {{ nrpe.cfg_dir }}/{{ check_name }}.cfg
+    - mode: {{ nrpe.cmd_mode }}
     - contents: |
         command[{{ check_name }}]={{ nrpe.plugin_dir }}/{{ check_def['plugin']['plugin_file'] }} {{ check_def['plugin'].get('plugin_args', "") }}
     - require:
