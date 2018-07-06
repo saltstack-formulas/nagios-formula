@@ -127,6 +127,7 @@ nagios:
     command_timeout: 60
     connection_timeout: 300
     dont_blame_nrpe: 0
+    allow_bash_command_substitution: 0
     nrpe_commands:
       - command[check_users]=/usr/lib/nagios/plugins/check_users -w 5 -c 10
       - command[check_load]=/usr/lib/nagios/plugins/check_load -w 15,10,5 -c 30,25,20

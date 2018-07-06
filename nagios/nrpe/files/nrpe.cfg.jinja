@@ -22,6 +22,7 @@ allowed_hosts={{ nrpe.allowed_hosts | default('127.0.0.1') }}
 {%- endif %}
 dont_blame_nrpe={{ nrpe.get('dont_blame_nrpe', 0) }}
 # command_prefix=/usr/bin/sudo
+allow_bash_command_substitution={{ nrpe.get('allow_bash_command_substitution', 0) }}
 debug=0
 command_timeout={{ nrpe.get('command_timeout', '60') }}
 connection_timeout={{ nrpe.get('connection_timeout', '300') }}
