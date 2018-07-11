@@ -8,6 +8,7 @@ nagios-nsca-client-package:
   file.managed:
     - source: salt://nagios/nsca/files/send_nsca.cfg.jinja
     - template: jinja
-    - user: root
-    - group: root
-    - mode: 600
+    - user: {{ nsca_client.get('user', 'root') }}
+    - group: {{ nsca_client.get('group', 'root') }}
+    - mode: {{ nsca_client.get('mode', '0600') }}
+
