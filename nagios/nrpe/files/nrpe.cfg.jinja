@@ -30,15 +30,3 @@ connection_timeout={{ nrpe.get('connection_timeout', '300') }}
 include_dir={{nrpe_map.get('cfg_dir')}}
 {%- endif %}
 #allow_weak_random_seed=1
-
-{%- if nrpe.nrpe_commands is defined %}
-{%- if nrpe.get('nrpe_commands') is mapping %}
-{%- for nrpe_command in nrpe.get('nrpe_commands').values() %}
-{{ nrpe_command }}
-{%- endfor %}
-{%- elif nrpe.get('nrpe_commands') is iterable %}
-{%- for nrpe_command in nrpe.get('nrpe_commands') %}
-{{ nrpe_command }}
-{%- endfor %}
-{%- endif %}
-{%- endif %}

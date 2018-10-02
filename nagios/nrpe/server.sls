@@ -36,6 +36,39 @@ nrpe-server-service:
     - require:
       - pkg: {{ nrpe.server }}
 
+
+{%- if nrpe.nrpe_commands is defined %}
+  {%- if nrpe.get('nrpe_commands') is mapping %}
+    {%- for check_id, nrpe_command in nrpe.get('nrpe_commands').items() %}
+{{ nrpe.cfg_dir }}/{{ check_id }}:
+  file.managed:
+    - contents: "{{ nrpe_command }}"
+    - user: root
+    - group: root
+    - mode: 644
+    - require:
+      - file: {{ nrpe.cfg_dir }}
+    - watch_in:
+      - service: {{ nrpe.service }}
+    {%- endfor %}
+  {%- elif nrpe.get('nrpe_commands') is iterable %}
+    {%- for nrpe_command in nrpe.get('nrpe_commands') %}
+    {% set cmd_id = nrpe_command.split("[")[1].split("]")[0] %}
+{{ nrpe.cfg_dir }}/{{ check_id }}:
+  file.managed:
+    - contents : "{{ nrpe_command }}"
+    - user: root
+    - group: root
+    - mode: 644
+    - require:
+      - file: {{ nrpe.cfg_dir }}
+    - watch_in:
+      - service: {{ nrpe.service }}
+    {%- endfor %}
+  {%- endif %}
+{%- endif %}
+
+
 {% if grains['os_family'] == 'RedHat' %}
 {# create link on Redhat to be more close to debian and other distributions #}
 nagios_plugins_sym:
