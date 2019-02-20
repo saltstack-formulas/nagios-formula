@@ -17,6 +17,8 @@ nrpe-server-service:
     - user: root
     - group: wheel
     - mode: 644
+    - require:
+      - pkg: nrpe-server-package
     - watch_in:
       - service: {{ nrpe.service }}
 {% else %}
@@ -27,6 +29,8 @@ nrpe-server-service:
     - user: root
     - group: root
     - mode: 644
+    - require:
+      - pkg: nrpe-server-package
     - watch_in:
       - service: {{ nrpe.service }}
 {% endif %}
