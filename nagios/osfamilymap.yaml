@@ -1,0 +1,142 @@
+Arch:
+  cgi:
+    nagios_check_command: /usr/lib/nagios/plugins/check_nagios /var/nagios/status.dat 5 \'/usr/sbin/nagios\'
+    physical_html_path: /usr/share/nagios/share
+  nagios:
+    cgi_conf: /etc/nagios/cgi.conf
+    check_result_path: /var/nagios/spool/checkresults
+    command_file: /var/nagios/rw/nagios.cmd
+    conf: /etc/nagios/nagios.conf
+    lock_file: /var/nagios/nagios.lock
+    log: /var/nagios/nagios.log
+    log_archive_path: /var/nagios/archives
+    object_cache: /var/nagios/objects.cache
+    p1_file: /usr/share/nagios/bin/p1.pl
+    plugin_dir: /usr/lib/nagios/plugins
+    precached_object_file: /var/nagios/objects.precache
+    resource_file: /etc/nagios/resource.cfg
+    state_retention_file: /var/nagios/retention.dat
+    status_file: /var/nagios/status.dat
+    temp_file: /var/nagios/nagios.tmp
+  nrpe:
+    plugin: nagios-nrpe-plugin
+    server: nagios-nrpe
+
+Debian:
+  cgi:
+    config_file: /etc/nagios3/nagios.cfg
+    nagios_check_command: /usr/lib/nagios/plugins/check_nagios /var/cache/nagios3/status.dat 5 \'/usr/sbin/nagios3\'
+    physical_html_path: /usr/share/nagios3/htdocs
+    url_html_path: /nagios3
+  nagios:
+    cgi_conf: /etc/nagios3/cgi.cfg
+    check_result_path: /var/lib/nagios3/spool/checkresults
+    command_file: /var/lib/nagios3/rw/nagios.cmd
+    conf: /etc/nagios3/nagios.cfg
+    debug_file: /var/log/nagios3/nagios.debug
+    lock_file: /var/run/nagios3/nagios3.pid
+    log: /var/log/nagios3/nagios.log
+    log_archive_path: /var/log/nagios3/archives
+    object_cache: /var/cache/nagios3/objects.cache
+    p1_file: /usr/lib/nagios3/p1.pl
+    plugin_dir: /usr/lib/nagios/plugins
+    precached_object_file: /var/lib/nagios3/objects.precache
+    resource_file: /etc/nagios3/resource.cfg
+    server: nagios3
+    service: nagios3
+    state_retention_file: /var/lib/nagios3/retention.dat
+    status_file: /var/cache/nagios3/status.dat
+    temp_file: /var/cache/nagios3/nagios.tmp
+  nrpe:
+    plugin: nagios-nrpe-plugin
+    server: nagios-nrpe-server
+    service: nagios-nrpe-server
+    cmd_mode: 0644
+    install_recommends: True
+    user: nagios
+    group: nagios
+
+FreeBSD:
+  cgi:
+    config_file: /usr/local/etc/nagios/nagios.cfg
+    nagios_check_command: /usr/local/libexec/nagios/check_nagios /var/spool/nagios/status.dat 5 \'/usr/local/bin/nagios\'
+    physical_html_path: /usr/local/www/nagios
+  nagios:
+    cgi_conf: /usr/local/etc/nagios/cgi.cfg
+    check_result_path: /var/spool/nagios/checkresults/
+    command_file: /var/spool/nagios/rw/nagios.cmd
+    conf: /usr/local/etc/nagios/nagios.cfg
+    debug_file: /var/nagios/nagios.debug
+    lock_file: /var/spool/nagios/nagios.lock
+    log: /var/nagios/nagios.log
+    log_archive_path: /var/spool/nagios/archives/
+    object_cache: /var/spool/nagios/objects.cache
+    p1_file: /usr/local/bin/p1.pl
+    plugin_dir: /usr/local/libexec/nagios
+    precached_object_file: /var/spool/nagios/objects.precache
+    resource_file: /usr/local/etc/nagios/resource.cfg
+    state_retention_file: /var/spool/nagios/retention.dat
+    status_file: /var/spool/nagios/status.dat
+    temp_file: /var/spool/nagios/nagios.tmp
+  nrpe:
+    cfg_dir: /usr/local/etc/nrpe.d
+    plugin: nagios-plugins
+    plugin_dir: /usr/local/libexec/nagios
+    server: nrpe3
+    service: nrpe3
+
+Gentoo:
+  cgi:
+    nagios_check_command: /usr/lib64/nagios/plugins/check_nagios /var/nagios/status.dat 5 \'/usr/sbin/nagios\'
+    physical_html_path: /usr/share/nagios/htdocs
+  nagios:
+    cgi_conf: /etc/nagios/cgi.conf
+    check_result_path: /var/nagios/spool/checkresults
+    command_file: /var/nagios/rw/nagios.cmd
+    conf: /etc/nagios/nagios.conf
+    debug_file: /var/nagios/nagios.debug
+    lock_file: /var/nagios/nagios.lock
+    log: /var/nagios/nagios.log
+    log_archive_path: /var/nagios/archives
+    object_cache: /var/nagios/objects.cache
+    p1_file: /usr/share/nagios/bin/p1.pl
+    plugins: net-analyzer/nagios-plugins
+    plugin_dir: /usr/lib/nagios/plugins
+    precached_object_file: /var/nagios/objects.precache
+    resource_file: /etc/nagios/resource.cfg
+    server: net-analyzer/nagios
+    state_retention_file: /var/nagios/retention.dat
+    status_file: /var/nagios/status.dat
+    temp_file: /var/nagios/nagios.tmp
+  nrpe:
+    user: nagios
+    group: nagios
+    plugin: net-analyzer/monitoring-plugins
+    server: net-analyzer/nrpe
+    plugin_dir: /usr/lib64/nagios/plugins
+
+RedHat:
+  cgi:
+    nagios_check_command: /usr/lib64/nagios/plugins/check_nagios -F /var/log/nagios/status.dat -e 5 -C /usr/sbin/nagios
+    physical_html_path: /usr/share/nagios/html
+  nagios:
+    cgi_conf: /etc/nagios/cgi.cfg
+    check_result_path: /var/log/nagios/spool/checkresults
+    command_file: /var/spool/nagios/cmd/nagios.cmd
+    conf: /etc/nagios/nagios.cfg
+    debug_file: /var/log/nagios/nagios.debug
+    lock_file: /var/run/nagios.pid
+    log: /var/log/nagios/nagios.log
+    log_archive_path: /var/log/nagios/archives
+    object_cache: /var/log/nagios/objects.cache
+    p1_file: /usr/sbin/p1.pl
+    plugin_dir: /usr/lib/nagios/plugins
+    precached_object_file: /var/log/nagios/objects.precache
+    resource_file: /etc/nagios/private/resource.cfg
+    state_retention_file: /var/log/nagios/retention.dat
+    status_file: /var/log/nagios/status.dat
+    temp_file: /var/log/nagios/nagios.tmp
+  nrpe:
+    plugin: nagios-plugins-all
+    plugin_dir: /usr/lib64/nagios/plugins
+    pid_file: /var/run/nrpe/nrpe.pid

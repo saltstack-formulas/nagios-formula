@@ -1,0 +1,18 @@
+cgi:
+  config_file: /etc/nagios/nagios.cfg
+  url_html_path: /nagios
+nagios:
+  server: nagios
+  service: nagios
+  service_status: enabled
+  plugins: nagios-plugins
+nrpe:
+  cfg_dir: /etc/nagios/nrpe.d
+  install_recommends: False
+  plugin_dir: /usr/lib/nagios/plugins
+  user: nrpe
+  group: nrpe
+  service: nrpe
+  server: nrpe
+nsca:
+  client: nsca-client
