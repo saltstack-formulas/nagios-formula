@@ -79,9 +79,11 @@ FreeBSD:
     status_file: /var/spool/nagios/status.dat
     temp_file: /var/spool/nagios/nagios.tmp
   nrpe:
+    nrpe_conf: /usr/local/etc/nrpe.cfg
     cfg_dir: /usr/local/etc/nrpe.d
     plugin: nagios-plugins
     plugin_dir: /usr/local/libexec/nagios
+    root_group: wheel
     server: nrpe3
     service: nrpe3
 
@@ -137,6 +139,13 @@ RedHat:
     status_file: /var/log/nagios/status.dat
     temp_file: /var/log/nagios/nagios.tmp
   nrpe:
+    plugin: nagios-plugins-all
+    plugin_dir: /usr/lib64/nagios/plugins
+    pid_file: /var/run/nrpe/nrpe.pid
+
+SuSE:
+  nrpe:
+    conf: /etc/nrpe/nrpe.cfg
     plugin: nagios-plugins-all
     plugin_dir: /usr/lib64/nagios/plugins
     pid_file: /var/run/nrpe/nrpe.pid
