@@ -9,34 +9,24 @@ nrpe-server-service:
     - name: {{ nrpe.service }}
     - enable: true
 
-{% if grains['os'] == 'FreeBSD' %}
-/usr/local/etc/nrpe.cfg:
+nrpe-server-config:
    file.managed:
+    - name: {{ nrpe.conf }}
     - source: salt://nagios/nrpe/files/nrpe.cfg.jinja
     - template: jinja
     - user: root
-    - group: wheel
+    - group: {{ nrpe.root_group }}
     - mode: 644
     - require:
       - pkg: nrpe-server-package
     - watch_in:
       - service: {{ nrpe.service }}
-{% else %}
-/etc/nagios/nrpe.cfg:
-   file.managed:
-    - source: salt://nagios/nrpe/files/nrpe.cfg.jinja
-    - template: jinja
-    - user: root
-    - group: root
-    - mode: 644
-    - require:
-      - pkg: nrpe-server-package
-    - watch_in:
-      - service: {{ nrpe.service }}
-{% endif %}
 
-{{ nrpe.cfg_dir }}:
+nrpe-cfg_dir:
   file.directory:
+    - name: {{ nrpe.cfg_dir }}
+    - user: root
+    - group: {{ nrpe.root_group }}
     - require:
       - pkg: {{ nrpe.server }}
 
@@ -66,7 +56,7 @@ nrpe-user:
     - guid: 31
 
 extend:
-  /etc/nagios/nrpe.cfg:
+  nrpe-server-config:
     file:
       - user: nrpe
       - group: nrpe

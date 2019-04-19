@@ -7,11 +7,13 @@ nagios:
   service_status: enabled
   plugins: nagios-plugins
 nrpe:
+  conf: /etc/nagios/nrpe.cfg
   cfg_dir: /etc/nagios/nrpe.d
   install_recommends: False
   plugin_dir: /usr/lib/nagios/plugins
   user: nrpe
   group: nrpe
+  root_group: root
   service: nrpe
   server: nrpe
 nsca:
