@@ -123,21 +123,21 @@ RedHat:
     physical_html_path: /usr/share/nagios/html
   nagios:
     cgi_conf: /etc/nagios/cgi.cfg
-    check_result_path: /var/log/nagios/spool/checkresults
+    check_result_path: /var/spool/nagios/checkresults
     command_file: /var/spool/nagios/cmd/nagios.cmd
     conf: /etc/nagios/nagios.cfg
     debug_file: /var/log/nagios/nagios.debug
-    lock_file: /var/run/nagios.pid
+    lock_file: /var/run/nagios/nagios.pid
     log: /var/log/nagios/nagios.log
     log_archive_path: /var/log/nagios/archives
-    object_cache: /var/log/nagios/objects.cache
+    object_cache: /var/spool/nagios/objects.cache
     p1_file: /usr/sbin/p1.pl
     plugin_dir: /usr/lib/nagios/plugins
-    precached_object_file: /var/log/nagios/objects.precache
+    precached_object_file: /var/spool/nagios/objects.precache
     resource_file: /etc/nagios/private/resource.cfg
-    state_retention_file: /var/log/nagios/retention.dat
-    status_file: /var/log/nagios/status.dat
-    temp_file: /var/log/nagios/nagios.tmp
+    state_retention_file: /var/spool/nagios/retention.dat
+    status_file: /var/spool/nagios/status.dat
+    temp_file: /var/spool/nagios/nagios.tmp
   nrpe:
     plugin: nagios-plugins-all
     plugin_dir: /usr/lib64/nagios/plugins
