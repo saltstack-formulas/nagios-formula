@@ -142,6 +142,7 @@ RedHat:
     plugin: nagios-plugins-all
     plugin_dir: /usr/lib64/nagios/plugins
     pid_file: /var/run/nrpe/nrpe.pid
+    cmd_mode: 0644
 
 SuSE:
   nrpe:
